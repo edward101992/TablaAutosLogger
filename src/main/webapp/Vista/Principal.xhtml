@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Universidad Cundinamarca</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true" />
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Automoviles
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Universidad Cundinamarca
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <br></br>
+                    <br></br>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <p:outputLabel for="nombre" value="Nombre :" />
+                    <p:inputText id="nombre" value="#{principal.auto.nombre}" required="true" label="Nombre">
+                    <f:validateLength minimum="2" />
+                    </p:inputText>    
+                    <p:message for="nombre" display="icon" />
+                    <br></br>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <p:outputLabel value="Marca : " for="somMarca" />
+                    <p:selectOneMenu var="auto" id="somMarca" value="#{auto}" style="width:150px" required="true">
+                    <f:selectItem itemLabel="Seleccione" itemValue="auto" noSelectionOption="true" />
+                    <f:selectItems id="marcasAuto" value="#{principal.auto}" var="auto" itemLabel="#{auto}" itemValue="#{auto}" />
+                    </p:selectOneMenu> 
+                                        
+                    <br></br>
+                    <br></br>
+                     &nbsp;
+                     &nbsp;
+                     &nbsp;
+                     &nbsp;
+                     &nbsp;
+                     &nbsp;                    
+                     <p:outputLabel for="calendario" value="Modelo:" />
+                     <p:calendar id="calendario" value="#{principal.auto.modelo}" pattern="yyyy" required="true" showWeek="true">
+                         <p:ajax event="dateSelect" listener="#{auto.onDateSelect}" update="msgs" />
+                     </p:calendar>
+                     <br></br>
+                     <br></br>
+                     <br></br>
+                     <p:commandButton value="Agregar a la Lista" actionListener="#{principal.agregarAuto}" style="margin-right:20px;">  
+                        <f:ajax render=":form:tabla"/>
+                     </p:commandButton>
+                    
+                </p:layoutUnit>
+
+            </p:layout>
+            </h:form>
+        </h:body>
+
+    </f:view>
+</html>
+
