@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -23,7 +24,7 @@ import org.primefaces.event.SelectEvent;
  * @author SuperUs
  */
 @Named(value = "auto")
-@Dependent
+@ApplicationScoped
 public class Auto implements Serializable{
 
     

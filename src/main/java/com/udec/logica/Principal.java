@@ -8,19 +8,23 @@ package com.udec.logica;
 import com.udec.tablaautoslogger.Auto;
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
  * @author SuperUs
  */
 @Named(value = "principal")
-@RequestScoped
+@ApplicationScoped
 public class Principal {
 
     private Auto auto = new Auto();
-    private List<Auto> listaAuto = new ArrayList();
+    private static List<Auto> listaAuto = new ArrayList();
     public Principal() {
     }
 
@@ -37,12 +41,20 @@ public class Principal {
     }
 
     public void setListaAuto(List<Auto> listaAuto) {
-        this.listaAuto = listaAuto;
+        Principal.listaAuto = listaAuto;
     }
     
     public void agregarAuto(){  
-        this.listaAuto.add(this.auto);
+        Principal.listaAuto.add(this.auto);
     }
     
     
+    public void editarAuto(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Auto editado", ((Auto) event.getObject()).getNombre());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void eliminarAuto(Auto auto){
+        Principal.listaAuto.remove(auto);
+    }
 }
