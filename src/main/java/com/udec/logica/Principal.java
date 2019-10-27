@@ -14,7 +14,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
-
+import java.util.logging.Logger;
 /**
  *
  * @author SuperUs
@@ -25,6 +25,7 @@ public class Principal {
 
     private Auto auto = new Auto();
     private static List<Auto> listaAuto = new ArrayList();
+    private final Logger log = Logger.getLogger(this.getClass().getName());
     public Principal() {
     }
 
@@ -46,15 +47,18 @@ public class Principal {
     
     public void agregarAuto(){  
         Principal.listaAuto.add(this.auto);
+        log.info("Auto agregado");
     }
     
     
     public void editarAuto(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Auto editado", ((Auto) event.getObject()).getNombre());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        log.info("Auto Editado");
     }
     
     public void eliminarAuto(Auto auto){
         Principal.listaAuto.remove(auto);
+        log.info("Auto Eliminado");
     }
 }

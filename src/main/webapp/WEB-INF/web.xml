@@ -9,6 +9,15 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>CargaLog4j</servlet-name>
+         <servlet-class>es.com.blogspot.programandoointentandolo.log4j.CargaLog4j</servlet-class>
+         <init-param>
+           <param-name>log4jPropertiesFile</param-name>
+           <param-value>/WEB-INF/classes/log4j.properties</param-value>
+         </init-param>
+         <load-on-startup>1</load-on-startup>
+       </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
