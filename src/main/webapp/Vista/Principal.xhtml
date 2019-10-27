@@ -49,11 +49,11 @@
                     &nbsp;
                     &nbsp;
                     <p:outputLabel value="Marca : " for="somMarca" />
-                    <p:selectOneMenu var="auto" id="somMarca" value="#{auto}" style="width:150px" required="true">
-                    <f:selectItem itemLabel="Seleccione" itemValue="auto" noSelectionOption="true" />
-                    <f:selectItems id="marcasAuto" value="#{principal.auto}" var="auto" itemLabel="#{auto}" itemValue="#{auto}" />
+                    <p:selectOneMenu id="somMarca" value="#{principal.auto.marca}" style="width:150px" required="true">
+                    <f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{auto.marca}" var="marca" itemLabel="#{marca}" itemValue="#{marca}" />
                     </p:selectOneMenu> 
-                                        
+                                      
                     <br></br>
                     <br></br>
                      &nbsp;
@@ -69,10 +69,47 @@
                      <br></br>
                      <br></br>
                      <br></br>
-                     <p:commandButton value="Agregar a la Lista" actionListener="#{principal.agregarAuto}" style="margin-right:20px;">  
+                     <p:commandButton   value="Agregar a la Lista" actionListener="#{principal.agregarAuto()}" style="margin-right:20px;">  
                         <f:ajax render=":form:tabla"/>
                      </p:commandButton>
                     
+                <br></br>
+                <p:dataTable  paginator="true" rows="5" editable="true" widgetVar="dataTableWidgetVar"   id="tabla" value="#{principal.listaAuto}" var="aut">     
+                            
+                            <f:facet name="header">     
+                                <h:outputText value="Buscar"/>
+                                <p:inputText id="globalFilter" onkeyup="PF('dataTableWidgetVar').filter() " style="width: 150px " placeholder="Ingrese Busqueda"/>                              
+                            </f:facet>
+                    
+                            <p:column headerText="Nombre" filterBy="#{aut.nombre}" filterStyle="width:100px;" filterMatchMode="contains" >
+                              <p:outputLabel  value="#{aut.nombre}"/>
+                            </p:column  >
+                            
+                            <br></br>
+                            
+                            <p:column headerText="Marca" filterBy="#{marca}" filterStyle="width:100px;" filterMatchMode="contains"> 
+                                <br></br>
+                                <p:outputLabel id="marc" value="#{auto.marca.get()}">
+                                      
+                                </p:outputLabel>
+                            </p:column>
+
+                            <p:column   headerText="Fecha" filterBy="#{aut.modelo}" filterStyle="width:100px;" filterMatchMode="contains">
+                             
+                                <br></br>
+
+                                <p:outputLabel  value="#{aut.modelo}">
+                                <f:convertDateTime pattern="yyyy" dateStyle="type"/>
+                                </p:outputLabel>
+
+                            </p:column >
+                            <br></br>
+
+                            <br></br>
+             
+
+                        </p:dataTable>
+                     
                 </p:layoutUnit>
 
             </p:layout>

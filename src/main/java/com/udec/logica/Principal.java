@@ -40,8 +40,7 @@ public class Principal {
         this.listaAuto = listaAuto;
     }
     
-    public void agregarAuto(){
-    
+    public void agregarAuto(){  
         this.listaAuto.add(this.auto);
     }
     
